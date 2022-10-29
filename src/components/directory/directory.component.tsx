@@ -6,7 +6,7 @@ import React from "react";
 
 const Directory = ({categories}) => {
     return (
-            <div className='directory-container'>
+            <div className='directory-container font'>
                 {
                     categories.map((category: ICategory) => (
 
