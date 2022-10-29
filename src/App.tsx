@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 
 const App = () => {
 
@@ -31,10 +31,10 @@ const App = () => {
         <div className="categories-container">
             {
                 categories.map(({id, title}) => (
-                    <div className="category-container">
+                    <div key={id} className="category-container">
                         <div className="background-image"></div>
                         <div className="category-body-container">
-                            <h2>hats</h2>
+                            <h2>{title}</h2>
                             <h2>shop now</h2>
                         </div>
                     </div>
