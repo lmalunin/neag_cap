@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
-import CategoryItemComponent from "./category-item/category-item.component";
 import ICategory from "./interfaces/category.interface";
+import Directory from "./components/directory/directory.component";
 
 const App = () => {
 
@@ -34,14 +34,7 @@ const App = () => {
     ]
 
     return (
-            <div className="categories-container">
-                {
-                    categories.map((category: ICategory) => (
-                            <CategoryItemComponent key={category.id}
-                                                   category={category}/>
-                    ))
-                }
-            </div>
+            <Directory categories={categories}/>
     );
 }
 
