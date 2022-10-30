@@ -1,6 +1,7 @@
 import ICategory from "../../interfaces/category.interface";
 import Directory from "../../components/directory/directory.component";
 import React from "react";
+import {Outlet} from 'react-router-dom';
 
 const Home = () => {
     const categories: ICategory[] = [
@@ -31,7 +32,12 @@ const Home = () => {
         }
     ]
 
-    return <Directory categories={categories}/>;
+    return (
+            <div>
+                <Outlet/>
+                <Directory categories={categories}/>
+            </div>
+    );
 
 }
 
