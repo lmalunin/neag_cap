@@ -55,35 +55,44 @@ const SignUpFormComponent = () => {
                 <form onSubmit={(event) => handleSubmit(event)}>
                     <FormInputComponent
                             label='Display name'
-                            required
-                            type="text"
-                            onChange={(event) => changeHandler(event)}
-                            name="displayName"
-                            value={displayName}/>
+                            inputOptions={{
+                                type: "text",
+                                required: true,
+                                onChange: (event) => changeHandler(event),
+                                name: "displayName",
+                                value: displayName
+                            }}
+                    />
 
                     <FormInputComponent
                             label='Email'
-                            required
-                            type="email"
-                            onChange={(event) => changeHandler(event)}
-                            name="email"
-                            value={email}/>
+                            inputOptions={{
+                                type: "text",
+                                required: true,
+                                onChange: (event) => changeHandler(event),
+                                name: "email",
+                                value: displayName
+                            }}/>
 
                     <FormInputComponent
                             label='Password'
-                            required
-                            type=""
-                            onChange={(event) => changeHandler(event)}
-                            name="password"
-                            value={password}/>
+                            inputOptions={{
+                                type: "text",
+                                required: true,
+                                onChange: (event) => changeHandler(event),
+                                name: "password",
+                                value: displayName
+                            }}/>
 
                     <FormInputComponent
                             label='Confirm password'
-                            required
-                            type=""
-                            onChange={(event) => changeHandler(event)}
-                            name="confirmPassword"
-                            value={confirmPassword}/>
+                            inputOptions={{
+                                type: "text",
+                                required: true,
+                                onChange: (event) => changeHandler(event),
+                                name: "confirmPassword",
+                                value: displayName
+                            }}/>
 
                     <button type="submit">Sign Up</button>
                 </form>
