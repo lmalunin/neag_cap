@@ -3,6 +3,7 @@ import './sign-up-form.styles.scss';
 import {useState} from "react";
 import {createAuthUserWithEmailAndPassword, createUserDocumentFromAuth} from "../../utils/firebase/frebase.utils";
 import FormInputComponent from "../../form-input/form-input.component";
+import ButtonComponent from "../../button/button.component";
 
 const defaultFormFields = {
     displayName: '',
@@ -51,7 +52,8 @@ const SignUpFormComponent = () => {
 
     return (
             <div className='sign-up-container'>
-                <h1>Sign up with your email and password</h1>
+                <h2>Don't have an account?</h2>
+                <span>Sign up with your email and password</span>
                 <form onSubmit={(event) => handleSubmit(event)}>
                     <FormInputComponent
                             label='Display name'
@@ -94,7 +96,7 @@ const SignUpFormComponent = () => {
                                 value: displayName
                             }}/>
 
-                    <button type="submit">Sign Up</button>
+                    <ButtonComponent buttonType="submit" type='submit'>Sign Up</ButtonComponent>
                 </form>
             </div>
     );
