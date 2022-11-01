@@ -8,6 +8,7 @@ import {
     signInWithGooglePopup,
     signInWithGoogleRedirect
 } from "../../utils/firebase/frebase.utils";
+import SignUpFormComponent from "../../components/sign-up-form/sign-up-form.component";
 
 const SignIn = () => {
 
@@ -26,14 +27,12 @@ const SignIn = () => {
         const userDocRef = await createUserDocumentFromAuth(user);
     }
 
-    const logGoogleRedrectUser = async () => {
-        const {user} = await signInWithGoogleRedirect();
-        console.log(user);
-    }
-
     return (
             <div>
                 <h1>Sing in page</h1>
+
+                <SignUpFormComponent></SignUpFormComponent>
+
                 <button onClick={() => logGoogleUser()}>
                     Sign in with google popup
                 </button>
