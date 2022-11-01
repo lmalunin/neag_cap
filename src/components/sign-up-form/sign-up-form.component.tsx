@@ -1,6 +1,6 @@
 import {useState} from "react";
-import {auth} from "../../utils/firebase/frebase.utils";
-import {createUserWithEmailAndPassword} from "firebase/auth";
+import {createAuthUserWithEmailAndPassword, createUserDocumentFromAuth} from "../../utils/firebase/frebase.utils";
+import {signInWithEmailAndPassword} from "firebase/auth";
 
 const defaultFormFields = {
     displayName: '',
@@ -14,14 +14,32 @@ const SignUpFormComponent = () => {
     const [formFields, setFormFields] = useState(defaultFormFields);
     const {displayName, email, password, confirmPassword} = formFields;
 
-    console.log(formFields);
+    const resetFormFields = () => {
+        setFormFields(defaultFormFields);
+    }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const {password, confirmPassword} = event.target;
-        if (password == confirmPassword && auth.currentUser) {
-            await createUserWithEmailAndPassword(auth, email, password);
+
+        if (password != confirmPassword) {
+            alert('Password does not match');
+            return;
         }
+
+        try {
+            const result = await createAuthUserWithEmailAndPassword(email, password);
+            console.log(result);
+            await createUserDocumentFromAuth(result?.user, {displayName});
+            resetFormFields();
+        } catch (error: any) {
+
+            if (error.code = 'auth/email-already-in-use') {
+                alert('Cannot create user, email already in use');
+            } else {
+                console.log('user creation encountered an error', error);
+            }
+        }
+
     }
 
     const handleChange = (event) => {
@@ -42,11 +60,11 @@ const SignUpFormComponent = () => {
                            value={email}/>
 
                     <label htmlFor="">Password</label>
-                    <input required type="password" onChange={(event) => handleChange(event)} name="password"
+                    <input required type="" onChange={(event) => handleChange(event)} name="password"
                            value={password}/>
 
                     <label htmlFor="">Confirm password</label>
-                    <input required type="password" onChange={(event) => handleChange(event)} name="confirmPassword"
+                    <input required type="" onChange={(event) => handleChange(event)} name="confirmPassword"
                            value={confirmPassword}/>
 
                     <button type="submit">Sign Up</button>
