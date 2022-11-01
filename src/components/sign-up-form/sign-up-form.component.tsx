@@ -18,7 +18,7 @@ const SignUpFormComponent = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const {password, confirmpassword} = event.target;
+        const {password, confirmPassword} = event.target;
         if (password == confirmPassword && auth.currentUser) {
             await createUserWithEmailAndPassword(auth, email, password);
         }
