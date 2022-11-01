@@ -1,4 +1,6 @@
 import {useState} from "react";
+import {auth} from "../../utils/firebase/frebase.utils";
+import {createUserWithEmailAndPassword} from "firebase/auth";
 
 const defaultFormFields = {
     displayName: '',
@@ -14,6 +16,14 @@ const SignUpFormComponent = () => {
 
     console.log(formFields);
 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const {password, confirmpassword} = event.target;
+        if (password == confirmPassword && auth.currentUser) {
+            await createUserWithEmailAndPassword(auth, email, password);
+        }
+    }
+
     const handleChange = (event) => {
         const {name, value} = event.target;
         setFormFields({...formFields, [name]: value});
@@ -22,8 +32,7 @@ const SignUpFormComponent = () => {
     return (
             <div>
                 <h1>Sign up with your email and password</h1>
-                <form onSubmit={() => {
-                }}>
+                <form onSubmit={(event) => handleSubmit(event)}>
                     <label htmlFor="">Display name</label>
                     <input required type="text" onChange={(event) => handleChange(event)} name="displayName"
                            value={displayName}/>
