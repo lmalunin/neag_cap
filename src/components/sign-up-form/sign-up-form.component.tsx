@@ -1,6 +1,8 @@
+import './sign-up-form.styles.scss';
+
 import {useState} from "react";
 import {createAuthUserWithEmailAndPassword, createUserDocumentFromAuth} from "../../utils/firebase/frebase.utils";
-import {signInWithEmailAndPassword} from "firebase/auth";
+import FormInputComponent from "../../form-input/form-input.component";
 
 const defaultFormFields = {
     displayName: '',
@@ -42,30 +44,46 @@ const SignUpFormComponent = () => {
 
     }
 
-    const handleChange = (event) => {
+    const changeHandler = (event) => {
         const {name, value} = event.target;
         setFormFields({...formFields, [name]: value});
     }
 
     return (
-            <div>
+            <div className='sign-up-container'>
                 <h1>Sign up with your email and password</h1>
                 <form onSubmit={(event) => handleSubmit(event)}>
-                    <label htmlFor="">Display name</label>
-                    <input required type="text" onChange={(event) => handleChange(event)} name="displayName"
-                           value={displayName}/>
+                    <FormInputComponent
+                            label='Display name'
+                            required
+                            type="text"
+                            onChange={(event) => changeHandler(event)}
+                            name="displayName"
+                            value={displayName}/>
 
-                    <label htmlFor="">Email</label>
-                    <input required type="email" onChange={(event) => handleChange(event)} name="email"
-                           value={email}/>
+                    <FormInputComponent
+                            label='Email'
+                            required
+                            type="email"
+                            onChange={(event) => changeHandler(event)}
+                            name="email"
+                            value={email}/>
 
-                    <label htmlFor="">Password</label>
-                    <input required type="" onChange={(event) => handleChange(event)} name="password"
-                           value={password}/>
+                    <FormInputComponent
+                            label='Password'
+                            required
+                            type=""
+                            onChange={(event) => changeHandler(event)}
+                            name="password"
+                            value={password}/>
 
-                    <label htmlFor="">Confirm password</label>
-                    <input required type="" onChange={(event) => handleChange(event)} name="confirmPassword"
-                           value={confirmPassword}/>
+                    <FormInputComponent
+                            label='Confirm password'
+                            required
+                            type=""
+                            onChange={(event) => changeHandler(event)}
+                            name="confirmPassword"
+                            value={confirmPassword}/>
 
                     <button type="submit">Sign Up</button>
                 </form>
