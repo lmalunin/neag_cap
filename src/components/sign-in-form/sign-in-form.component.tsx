@@ -36,7 +36,16 @@ const SignInFormComponent = () => {
             console.log(response);
             resetFormFields();
         } catch (error: any) {
-
+            switch (error.state) {
+                case 'auth/wrong-password':
+                    alert('incorrect password for email');
+                    break;
+                case 'auth/user-not-found':
+                    alert('no user exist');
+                    break;
+                default:
+                    console.log(error);
+            }
         }
     }
 
@@ -71,7 +80,8 @@ const SignInFormComponent = () => {
 
                     <div className='buttons-container'>
                         <ButtonComponent buttonType="submit" type='submit'>Sign In</ButtonComponent>
-                        <ButtonComponent buttonType="google" onClick={() => signInWithGoogle()}>Google Sign
+                        <ButtonComponent buttonType="google" type='button' onClick={() => signInWithGoogle()}>Google
+                            Sign
                             In</ButtonComponent>
                     </div>
 

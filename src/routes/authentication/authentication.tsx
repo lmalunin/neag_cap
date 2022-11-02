@@ -1,9 +1,10 @@
+import './authentication.styles.scss';
+
 import {useEffect} from "react";
 import {getRedirectResult} from 'firebase/auth';
 import {
     auth,
     createUserDocumentFromAuth,
-    signInWithGooglePopup,
     signInWithGoogleRedirect
 } from "../../utils/firebase/frebase.utils";
 import SignUpFormComponent from "../../components/sign-up-form/sign-up-form.component";
@@ -22,14 +23,13 @@ const SignIn = () => {
     }, []);
 
     return (
-            <div>
-                <h1>Sing in page</h1>
+            <div className='authentication-container'>
                 <SignInFormComponent></SignInFormComponent>
                 <SignUpFormComponent></SignUpFormComponent>
-                
-                <button onClick={() => signInWithGoogleRedirect()}>
-                    Sign in with google redirect
-                </button>
+
+                {/*<button onClick={() => signInWithGoogleRedirect()}>*/}
+                {/*    Sign in with google redirect*/}
+                {/*</button>*/}
             </div>
     )
 }
