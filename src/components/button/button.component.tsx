@@ -1,6 +1,8 @@
 import './button.styles.scss';
 
-const BUTTON_TYPE_CLASSES = {
+type BUTTON_TYPES = 'google' | 'inverted';
+
+const BUTTON_TYPE_CLASSES: Record<BUTTON_TYPES, string> = {
     google: 'google-sign-in',
     inverted: 'inverted',
 };
