@@ -1,6 +1,6 @@
 import './sign-in-form.styles.scss';
 
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {
     createAuthUserWithEmailAndPassword,
     createUserDocumentFromAuth, signInAuthUserWithEmailAndPassword,
@@ -8,6 +8,7 @@ import {
 } from "../../utils/firebase/frebase.utils";
 import FormInputComponent from "../form-input/form-input.component";
 import ButtonComponent from "../button/button.component";
+import {UserContext} from "../contexts/user.context";
 
 const defaultFormFields = {
     email: '',
@@ -18,6 +19,8 @@ const SignInFormComponent = () => {
 
     const [formFields, setFormFields] = useState(defaultFormFields);
     const {email, password} = formFields;
+
+    const {setCurrentUser} = useContext(UserContext);
 
     const resetFormFields = () => {
         setFormFields(defaultFormFields);
@@ -33,7 +36,7 @@ const SignInFormComponent = () => {
 
         try {
             const response = await signInAuthUserWithEmailAndPassword(email, password);
-            console.log(response);
+            setCurrentUser(response?.user);
             resetFormFields();
         } catch (error: any) {
             switch (error.state) {

@@ -11,6 +11,7 @@ const Shop = () => {
 
 
 const App = () => {
+    console.log('Hit App');
     return (
             <Routes>
                 <Route path='/' element={<Navigation/>}>
