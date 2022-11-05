@@ -2,7 +2,6 @@ import './sign-in-form.styles.scss';
 
 import {useContext, useState} from "react";
 import {
-    createAuthUserWithEmailAndPassword,
     createUserDocumentFromAuth, signInAuthUserWithEmailAndPassword,
     signInWithGooglePopup
 } from "../../utils/firebase/frebase.utils";
@@ -21,6 +20,7 @@ const SignInFormComponent = () => {
     const {email, password} = formFields;
 
     const {setCurrentUser} = useContext(UserContext);
+    console.log('Hit!');
 
     const resetFormFields = () => {
         setFormFields(defaultFormFields);
