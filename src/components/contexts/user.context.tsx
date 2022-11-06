@@ -1,5 +1,5 @@
 import {createContext, useState, type Dispatch, useEffect,} from "react";
-import {onAuthStateChangedListener} from "../../utils/firebase/frebase.utils";
+import {createUserDocumentFromAuth, onAuthStateChangedListener} from "../../utils/firebase/frebase.utils";
 
 export const UserContext = createContext({
     currentUser: null,
@@ -12,7 +12,10 @@ export const UserProvider = ({children}) => {
 
     useEffect(() => {
         const ubsubscribe = onAuthStateChangedListener((user) => {
-            console.log(user);
+            if (user) {
+                createUserDocumentFromAuth(user);
+            }
+            setCurrentUser(user);
         })
         return ubsubscribe;
     }, [])
