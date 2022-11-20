@@ -3,7 +3,7 @@ import './sign-up-form.styles.scss';
 import {useContext, useState} from "react";
 import {createAuthUserWithEmailAndPassword, createUserDocumentFromAuth} from "../../utils/firebase/frebase.utils";
 import FormInputComponent from "../form-input/form-input.component";
-import ButtonComponent from "../button/button.component";
+import ButtonComponent from "../button/buttonComponent";
 import {UserContext} from "../contexts/user.context";
 
 const defaultFormFields = {

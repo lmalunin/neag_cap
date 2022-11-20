@@ -6,7 +6,7 @@ import {
     signInWithGooglePopup
 } from "../../utils/firebase/frebase.utils";
 import FormInputComponent from "../form-input/form-input.component";
-import ButtonComponent from "../button/button.component";
+import ButtonComponent from "../button/buttonComponent";
 
 const defaultFormFields = {
     email: '',
