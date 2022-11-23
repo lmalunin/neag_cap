@@ -4,11 +4,7 @@ import './App.scss';
 import {Home} from "./routes/home/home.component";
 import {Navigation} from "./routes/navigation/navigation.component";
 import SignIn from "./routes/authentication/authentication";
-
-const Shop = () => {
-    return <h1>Shop page</h1>
-}
-
+import ShopComponent from "./components/shop/shop.component";
 
 const App = () => {
     console.log('Hit App');
@@ -16,7 +12,7 @@ const App = () => {
             <Routes>
                 <Route path='/' element={<Navigation/>}>
                     <Route index element={<Home/>}/>
-                    <Route path='/shop' element={<Shop/>}/>
+                    <Route path='/shop' element={<ShopComponent/>}/>
                     <Route path='/auth' element={<SignIn/>}/>
                 </Route>
             </Routes>

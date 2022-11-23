@@ -7,6 +7,7 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {UserProvider} from "./components/contexts/user.context";
+import {ShopProvider} from "./components/contexts/shop.context";
 
 const root = ReactDOM.createRoot(
         document.getElementById('root') as HTMLElement
@@ -15,7 +16,9 @@ root.render(
         <React.StrictMode>
             <BrowserRouter>
                 <UserProvider>
-                    <App/>
+                    <ShopProvider>
+                        <App/>
+                    </ShopProvider>
                 </UserProvider>
             </BrowserRouter>
         </React.StrictMode>
