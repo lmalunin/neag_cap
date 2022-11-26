@@ -7,7 +7,7 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {UserProvider} from "./components/contexts/user.context";
-import {ShopProvider} from "./components/contexts/shop.context";
+import {ProductsProvider} from "./components/contexts/productContext";
 
 const root = ReactDOM.createRoot(
         document.getElementById('root') as HTMLElement
@@ -16,9 +16,9 @@ root.render(
         <React.StrictMode>
             <BrowserRouter>
                 <UserProvider>
-                    <ShopProvider>
+                    <ProductsProvider>
                         <App/>
-                    </ShopProvider>
+                    </ProductsProvider>
                 </UserProvider>
             </BrowserRouter>
         </React.StrictMode>

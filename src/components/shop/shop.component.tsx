@@ -1,8 +1,8 @@
 import {useContext} from "react";
-import {ShopContext} from "../contexts/shop.context";
+import {ProductContext} from "../contexts/productContext";
 
 const ShopComponent = () => {
-    const {products} = useContext(ShopContext);
+    const {products} = useContext(ProductContext);
     return (
             <div>
                 {products.map(({id, name}) => (
