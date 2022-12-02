@@ -1,5 +1,4 @@
 import {createContext, Dispatch, useEffect, useState} from "react";
-import CartItem from "../cart-item/cart-item.component";
 
 export type CategoryItem = {
     id: number;
@@ -8,11 +7,11 @@ export type CategoryItem = {
     price: number;
 };
 
-export type CartItem = CategoryItem & {
+export type CartItemType = CategoryItem & {
     quantity: number;
 };
 
-const addCartItem = (cartItems, productToAdd): CartItem[] => {
+const addCartItem = (cartItems, productToAdd): CartItemType[] => {
 
     const existingCartItem = cartItems.find(cartItem => cartItem.id === productToAdd.id);
 
@@ -25,13 +24,13 @@ const addCartItem = (cartItems, productToAdd): CartItem[] => {
     return [...cartItems, {...productToAdd, quantity: 1}];
 }
 
-const removeItem = (cartItems, productToRemove): CartItem[] => {
+const removeItem = (cartItems, productToRemove): CartItemType[] => {
     return cartItems.map(cartItem => cartItem.id === productToRemove.id && cartItem.quantity > 0
             ? {...cartItem, quantity: cartItem.quantity - 1}
             : cartItem)
 }
 
-const removeAllSelectedItems = (cartItems, productToRemove): CartItem[] => {
+const removeAllSelectedItems = (cartItems, productToRemove): CartItemType[] => {
     return cartItems.map(cartItem => cartItem.id === productToRemove.id && cartItem.quantity > 0
             ? {...cartItem, quantity: 0}
             : cartItem)
@@ -40,31 +39,34 @@ const removeAllSelectedItems = (cartItems, productToRemove): CartItem[] => {
 export const CartContext = createContext({
     isCartOpen: false,
     setIsCartOpen: (() => undefined) as Dispatch<any>,
-    cartItems: new Array<CartItem>(),
+    cartItems: new Array<CartItemType>(),
     addItemToCart: (() => undefined) as Dispatch<any>,
     removeItemFromCart: (() => undefined) as Dispatch<any>,
     removeAllSelectedItemsFromCart: (() => undefined) as Dispatch<any>,
     cartCount: 0,
     setCartCount: (() => undefined) as Dispatch<any>,
+    totalPrice: 0,
+    setTotalPrice: (() => undefined) as Dispatch<any>,
 })
 
 export const CartProvider = ({children}) => {
     const [isCartOpen, setIsCartOpen] = useState(false);
-    const [cartItems, setCartItems] = useState(new Array<CartItem>());
+    const [cartItems, setCartItems] = useState(new Array<CartItemType>());
     const [cartCount, setCartCount] = useState(0);
+    const [totalPrice, setTotalPrice] = useState(0);
 
     const addItemToCart = (productToAdd) => {
-        const res: CartItem[] = addCartItem(cartItems, productToAdd)
+        const res: CartItemType[] = addCartItem(cartItems, productToAdd)
         setCartItems(res);
     }
 
     const removeItemFromCart = (productToRemove) => {
-        const res: CartItem[] = removeItem(cartItems, productToRemove)
+        const res: CartItemType[] = removeItem(cartItems, productToRemove)
         setCartItems(res);
     }
 
     const removeAllSelectedItemsFromCart = (productToRemove) => {
-        const res: CartItem[] = removeAllSelectedItems(cartItems, productToRemove)
+        const res: CartItemType[] = removeAllSelectedItems(cartItems, productToRemove)
         setCartItems(res);
     }
 
@@ -84,7 +86,9 @@ export const CartProvider = ({children}) => {
         removeItemFromCart,
         removeAllSelectedItemsFromCart,
         cartCount,
-        setCartCount
+        setCartCount,
+        totalPrice,
+        setTotalPrice
     };
 
 

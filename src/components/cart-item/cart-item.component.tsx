@@ -1,6 +1,6 @@
 import './cart-item.styles.scss';
 
-const CartItem = ({cartItem}) => {
+const CartItemComponent = ({cartItem}) => {
 
     const {name, imageUrl, price, quantity} = cartItem;
 
@@ -15,4 +15,4 @@ const CartItem = ({cartItem}) => {
     )
 }
 
-export default CartItem;
+export default CartItemComponent;
