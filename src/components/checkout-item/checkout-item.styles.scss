@@ -1,0 +1,9 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+  .addRemove {
+    display: grid;
+    grid-template-columns: 20px 100px 20px;
+  }
+}

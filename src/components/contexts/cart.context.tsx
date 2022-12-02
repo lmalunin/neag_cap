@@ -1,4 +1,5 @@
 import {createContext, Dispatch, useEffect, useState} from "react";
+import CartItem from "../cart-item/cart-item.component";
 
 export type CategoryItem = {
     id: number;
@@ -24,11 +25,25 @@ const addCartItem = (cartItems, productToAdd): CartItem[] => {
     return [...cartItems, {...productToAdd, quantity: 1}];
 }
 
+const removeItem = (cartItems, productToRemove): CartItem[] => {
+    return cartItems.map(cartItem => cartItem.id === productToRemove.id && cartItem.quantity > 0
+            ? {...cartItem, quantity: cartItem.quantity - 1}
+            : cartItem)
+}
+
+const removeAllSelectedItems = (cartItems, productToRemove): CartItem[] => {
+    return cartItems.map(cartItem => cartItem.id === productToRemove.id && cartItem.quantity > 0
+            ? {...cartItem, quantity: 0}
+            : cartItem)
+}
+
 export const CartContext = createContext({
     isCartOpen: false,
     setIsCartOpen: (() => undefined) as Dispatch<any>,
     cartItems: new Array<CartItem>(),
     addItemToCart: (() => undefined) as Dispatch<any>,
+    removeItemFromCart: (() => undefined) as Dispatch<any>,
+    removeAllSelectedItemsFromCart: (() => undefined) as Dispatch<any>,
     cartCount: 0,
     setCartCount: (() => undefined) as Dispatch<any>,
 })
@@ -40,6 +55,16 @@ export const CartProvider = ({children}) => {
 
     const addItemToCart = (productToAdd) => {
         const res: CartItem[] = addCartItem(cartItems, productToAdd)
+        setCartItems(res);
+    }
+
+    const removeItemFromCart = (productToRemove) => {
+        const res: CartItem[] = removeItem(cartItems, productToRemove)
+        setCartItems(res);
+    }
+
+    const removeAllSelectedItemsFromCart = (productToRemove) => {
+        const res: CartItem[] = removeAllSelectedItems(cartItems, productToRemove)
         setCartItems(res);
     }
 
@@ -56,6 +81,8 @@ export const CartProvider = ({children}) => {
         setIsCartOpen,
         cartItems,
         addItemToCart,
+        removeItemFromCart,
+        removeAllSelectedItemsFromCart,
         cartCount,
         setCartCount
     };
