@@ -27,7 +27,7 @@ const CheckoutListComponent = () => {
                                                                            cartItem={item}/>) : 'no items'
             }
 
-            <div>Total: {totalPrice}</div>
+            <div className={'total'}>Total: {totalPrice}</div>
         </>
     )
 }
