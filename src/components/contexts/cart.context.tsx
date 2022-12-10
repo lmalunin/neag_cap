@@ -1,4 +1,4 @@
-import {createContext, Dispatch, useEffect, useState} from "react";
+import { createContext, Dispatch, useEffect, useState } from "react";
 
 export type CategoryItem = {
     id: number;
@@ -17,23 +17,27 @@ const addCartItem = (cartItems, productToAdd): CartItemType[] => {
 
     if (existingCartItem) {
         return cartItems.map(cartItem => cartItem.id === productToAdd.id
-                ? {...cartItem, quantity: cartItem.quantity + 1}
-                : cartItem)
+            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            : cartItem)
     }
 
-    return [...cartItems, {...productToAdd, quantity: 1}];
+    return [...cartItems, { ...productToAdd, quantity: 1 }];
 }
 
 const removeItem = (cartItems, productToRemove): CartItemType[] => {
     return cartItems.map(cartItem => cartItem.id === productToRemove.id && cartItem.quantity > 0
-            ? {...cartItem, quantity: cartItem.quantity - 1}
-            : cartItem)
+        ? { ...cartItem, quantity: cartItem.quantity - 1 }
+        : cartItem)
 }
 
 const removeAllSelectedItems = (cartItems, productToRemove): CartItemType[] => {
-    return cartItems.map(cartItem => cartItem.id === productToRemove.id && cartItem.quantity > 0
-            ? {...cartItem, quantity: 0}
-            : cartItem)
+
+    return cartItems.filter(cartItem => cartItem.id !== productToRemove.id).map(cartItem => cartItem);
+
+    //clear to zero
+    // return cartItems.map(cartItem => cartItem.id === productToRemove.id && cartItem.quantity > 0
+    //         ? {...cartItem, quantity: 0}
+    //         : cartItem)
 }
 
 export const CartContext = createContext({
@@ -49,7 +53,7 @@ export const CartContext = createContext({
     setTotalPrice: (() => undefined) as Dispatch<any>,
 })
 
-export const CartProvider = ({children}) => {
+export const CartProvider = ({ children }) => {
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [cartItems, setCartItems] = useState(new Array<CartItemType>());
     const [cartCount, setCartCount] = useState(0);
@@ -72,7 +76,7 @@ export const CartProvider = ({children}) => {
 
     useEffect(() => {
         const newCartCount = cartItems.reduce(
-                (total, cartItem) => total + cartItem.quantity, 0
+            (total, cartItem) => total + cartItem.quantity, 0
         )
         setCartCount(newCartCount);
 
