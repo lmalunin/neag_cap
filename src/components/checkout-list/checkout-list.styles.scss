@@ -1,4 +1,6 @@
 .naming__wrapper {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 30% 15% 15% 20% 20%;
+  border-bottom: 1px solid gray;
+  margin-bottom: 10px;
 }
