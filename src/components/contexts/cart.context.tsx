@@ -31,7 +31,6 @@ const removeItem = (cartItems, productToRemove): CartItemType[] => {
 }
 
 const removeAllSelectedItems = (cartItems, productToRemove): CartItemType[] => {
-
     return cartItems.filter(cartItem => cartItem.id !== productToRemove.id);
 
     //clear to zero
