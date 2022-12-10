@@ -13,14 +13,22 @@ const CheckoutListComponent = () => {
     }, [cartItems]);
 
     return (
-        <div>
+        <>
+            <div style={{ display: "flex" }}>
+                <div>Product</div>
+                <div>Description</div>
+                <div>Quantity</div>
+                <div>Price</div>
+                <div>Remove</div>
+            </div>
+
             {
                 cartItems.length > 0 ? cartItems.map(item => <CheckoutItem key={item.id}
                                                                            cartItem={item}/>) : 'no items'
             }
 
             <div>Total: {totalPrice}</div>
-        </div>
+        </>
     )
 }
 

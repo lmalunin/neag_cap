@@ -1,26 +1,30 @@
+// html дингбаты https://unicode-table.com/ru/blocks/dingbats/
+
 import './checkout-item.styles.scss';
-import {useContext} from "react";
-import {CartContext} from "../contexts/cart.context";
+import { useContext } from "react";
+import { CartContext } from "../contexts/cart.context";
 
-const CheckoutItem = ({cartItem}) => {
+const CheckoutItem = ({ cartItem }) => {
 
-    const {addItemToCart, removeItemFromCart, removeAllSelectedItemsFromCart} = useContext(CartContext);
+    const { addItemToCart, removeItemFromCart, removeAllSelectedItemsFromCart } = useContext(CartContext);
 
     return (
-            <div className={'wrapper'}>
+        <div className={'checkout-item-container'}>
+            <div className={'image-container'}>
                 <img src={cartItem.imageUrl} alt={`${cartItem.name}`}/>
-                <div className={''}>
-                    <span className={''}>{cartItem.name}</span>
-                </div>
-                <div className={'addRemove'}>
-                    <div style={{cursor: "pointer"}} onClick={() => removeItemFromCart(cartItem)}>{'<'}</div>
-                    <div>{cartItem.quantity} x ${cartItem.price}</div>
-                    <div style={{cursor: "pointer"}} onClick={() => addItemToCart(cartItem)}>{'>'}</div>
-
-                </div>
-                <div>{cartItem.quantity * cartItem.price}$</div>
-                <div style={{cursor: "pointer"}} onClick={() => removeAllSelectedItemsFromCart(cartItem)}>Х</div>
             </div>
+            <span className={'name'}>{cartItem.name}</span>
+            <span style={{ cursor: "pointer" }} onClick={() => removeItemFromCart(cartItem)}>&#10094;</span>
+
+            <span className={'quantity'}>{cartItem.quantity} x ${cartItem.price}</span>
+            <span style={{ cursor: "pointer" }} onClick={() => addItemToCart(cartItem)}>&#10095;</span>
+            <span className={'price'}>{cartItem.quantity * cartItem.price}$</span>
+            <div className={'remove-button'}
+                 style={{ cursor: "pointer" }}
+                 onClick={() => removeAllSelectedItemsFromCart(cartItem)}>
+                &#10062;
+            </div>
+        </div>
     )
 }
 
