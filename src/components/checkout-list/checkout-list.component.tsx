@@ -14,7 +14,7 @@ const CheckoutListComponent = () => {
 
     return (
         <>
-            <div style={{ display: "flex" }}>
+            <div className={'naming__wrapper'}>
                 <div>Product</div>
                 <div>Description</div>
                 <div>Quantity</div>
