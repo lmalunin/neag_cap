@@ -1,4 +1,4 @@
-import {initializeApp} from 'firebase/app';
+import { initializeApp } from 'firebase/app';
 import {
     getAuth,
     signInWithRedirect,
@@ -9,7 +9,7 @@ import {
     signOut,
     onAuthStateChanged,
 } from 'firebase/auth';
-import {getFirestore, doc, getDoc, setDoc} from 'firebase/firestore';
+import { getFirestore, doc, getDoc, setDoc, collection, writeBatch } from 'firebase/firestore';
 
 const firebaseConfig = {
     apiKey: "AIzaSyCPDZ-WNyd8H6rVrQrrOyGeZ4tv004lhMw",
@@ -33,6 +33,10 @@ export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider)
 export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider);
 
 export const db = getFirestore();
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+    const colectionRef = collection(db, collectionKey);
+
+}
 export const createUserDocumentFromAuth = async (userAuth, additionalInformation = {}) => {
 
     if (!userAuth) return;
@@ -44,7 +48,7 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
     console.log(userSnapshot.exists());
 
     if (!userSnapshot.exists()) {
-        const {displayName, email} = userAuth;
+        const { displayName, email } = userAuth;
         const createdAt = new Date();
         try {
             await setDoc(userDocRef, {
