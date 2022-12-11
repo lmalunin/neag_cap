@@ -1,4 +1,5 @@
 // html дингбаты https://unicode-table.com/ru/blocks/dingbats/
+// html symbols https://www.htmlsymbols.xyz/number-symbols
 
 import './checkout-item.styles.scss';
 import { useContext } from "react";
