@@ -1,21 +1,21 @@
 import './directory.styles.scss';
 
 import ICategory from "../../interfaces/category.interface";
-import CategoryItemComponent from "../category-item/category-item.component";
+import DirectoryItemComponent from "../directory-item/directory-item.component";
 import React from "react";
 
-const Directory = ({categories}) => {
+const Directory = ({ categories }) => {
     return (
-            <div className='directory-container font'>
-                {
-                    categories.map((category: ICategory) => (
+        <div className='directory-container font'>
+            {
+                categories.map((category: ICategory) => (
 
-                            <CategoryItemComponent key={category.id}
-                                                   category={category}/>
+                    <DirectoryItemComponent key={category.id}
+                                            category={category}/>
 
-                    ))
-                }
-            </div>
+                ))
+            }
+        </div>
     );
 }
 
