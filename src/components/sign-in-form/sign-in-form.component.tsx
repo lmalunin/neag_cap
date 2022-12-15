@@ -1,12 +1,12 @@
 import './sign-in-form.styles.scss';
 
-import {useState} from "react";
+import { useState } from "react";
 import {
     createUserDocumentFromAuth, signInAuthUserWithEmailAndPassword,
     signInWithGooglePopup
 } from "../../utils/firebase/frebase.utils";
 import FormInputComponent from "../form-input/form-input.component";
-import ButtonComponent from "../button/buttonComponent";
+import ButtonComponent, { BUTTON_TYPE_CLASSES } from "../button/buttonComponent";
 
 const defaultFormFields = {
     email: '',
@@ -16,7 +16,7 @@ const defaultFormFields = {
 const SignInFormComponent = () => {
 
     const [formFields, setFormFields] = useState(defaultFormFields);
-    const {email, password} = formFields;
+    const { email, password } = formFields;
 
     console.log('Hit!');
 
@@ -49,43 +49,44 @@ const SignInFormComponent = () => {
     }
 
     const changeHandler = (event) => {
-        const {name, value} = event.target;
-        setFormFields({...formFields, [name]: value});
+        const { name, value } = event.target;
+        setFormFields({ ...formFields, [name]: value });
     }
 
     return (
-            <div className='sign-up-container'>
-                <h2>Already have an account?</h2>
-                <span>Sign in with your email and password</span>
-                <form onSubmit={(event) => submitHandler(event)}>
+        <div className='sign-up-container'>
+            <h2>Already have an account?</h2>
+            <span>Sign in with your email and password</span>
+            <form onSubmit={(event) => submitHandler(event)}>
 
-                    <FormInputComponent
-                            label='Email'
-                            inputOptions={{
-                                type: "text",
-                                required: true,
-                                onChange: (event) => changeHandler(event),
-                                name: "email",
-                            }}/>
+                <FormInputComponent
+                    label='Email'
+                    inputOptions={{
+                        type: "text",
+                        required: true,
+                        onChange: (event) => changeHandler(event),
+                        name: "email",
+                    }}/>
 
-                    <FormInputComponent
-                            label='Password'
-                            inputOptions={{
-                                type: "text",
-                                required: true,
-                                onChange: (event) => changeHandler(event),
-                                name: "password",
-                            }}/>
+                <FormInputComponent
+                    label='Password'
+                    inputOptions={{
+                        type: "text",
+                        required: true,
+                        onChange: (event) => changeHandler(event),
+                        name: "password",
+                    }}/>
 
-                    <div className='buttons-container'>
-                        <ButtonComponent buttonType="submit" type='submit'>Sign In</ButtonComponent>
-                        <ButtonComponent buttonType="google" type='button' onClick={() => signInWithGoogle()}>Google
-                            Sign
-                            In</ButtonComponent>
-                    </div>
+                <div className='buttons-container'>
+                    <ButtonComponent buttonType={BUTTON_TYPE_CLASSES.submit} type='submit'>Sign In</ButtonComponent>
+                    <ButtonComponent buttonType={BUTTON_TYPE_CLASSES.google} type='button'
+                                     onClick={() => signInWithGoogle()}>Google
+                        Sign
+                        In</ButtonComponent>
+                </div>
 
-                </form>
-            </div>
+            </form>
+        </div>
     );
 }
 
