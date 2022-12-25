@@ -1,4 +1,5 @@
-import { createContext, Dispatch, useEffect, useState } from "react";
+import { createContext, Dispatch, useEffect, useReducer, useState } from "react";
+import { USER_ACTION_TYPES } from "./user.context";
 
 export type CategoryItem = {
     id: number;
@@ -52,11 +53,50 @@ export const CartContext = createContext({
     setTotalPrice: (() => undefined) as Dispatch<any>,
 })
 
+const INITIAL_STATE = {
+    isCartOpen: false,
+    cartItems: new Array<CartItemType>(),
+    cartCount: 0,
+    totalPrice: 0,
+}
+
+const CART_ITEMS_ACTION_TYPES = {
+    SET_CART_ITEMS: 'SET_CART_ITEMS'
+}
+
+const cartReducer = (state, action) => {
+    const { type, payload } = action;
+    switch (type) {
+        case(CART_ITEMS_ACTION_TYPES.SET_CART_ITEMS): {
+            return {
+                ...state,
+                ...payload
+            }
+        }
+        default:
+            throw new Error(`throw new Error(\`Unhandled type ${type} in userReducer\`);`);
+
+    }
+}
+
 export const CartProvider = ({ children }) => {
     const [isCartOpen, setIsCartOpen] = useState(false);
-    const [cartItems, setCartItems] = useState(new Array<CartItemType>());
-    const [cartCount, setCartCount] = useState(0);
-    const [totalPrice, setTotalPrice] = useState(0);
+    //const [cartItems, setCartItems] = useState(new Array<CartItemType>());
+    //const [cartCount, setCartCount] = useState(0);
+    //const [totalPrice, setTotalPrice] = useState(0);
+
+    const [{ cartItems, cartCount, totalPrice }, dispatch] = useReducer(cartReducer, INITIAL_STATE);
+
+    const setCartItems = (cartItems) => {
+        dispatch({ type: CART_ITEMS_ACTION_TYPES.SET_CART_ITEMS, payload: { cartItems } });
+    }
+    const setCartCount = (cartCount) => {
+        dispatch({ type: CART_ITEMS_ACTION_TYPES.SET_CART_ITEMS, payload: { cartCount } });
+    }
+    const setTotalPrice = (totalPrice) => {
+        dispatch({ type: CART_ITEMS_ACTION_TYPES.SET_CART_ITEMS, payload: { totalPrice } });
+    }
+
 
     const addItemToCart = (productToAdd) => {
         const res: CartItemType[] = addCartItem(cartItems, productToAdd)
