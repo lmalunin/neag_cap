@@ -80,6 +80,7 @@ export const CartProvider = ({ children }) => {
 
     const [{ isCartOpen, cartItems, cartCount, totalPrice }, dispatch] = useReducer(cartReducer, INITIAL_STATE);
 
+    //action creator
     const setIsCartOpen = (isCartOpen) => {
         dispatch({ type: CART_ITEMS_ACTION_TYPES.SET_CART_ITEMS, payload: { isCartOpen } });
     }
