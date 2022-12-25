@@ -1,5 +1,4 @@
 import { createContext, Dispatch, useEffect, useReducer, useState } from "react";
-import { USER_ACTION_TYPES } from "./user.context";
 
 export type CategoryItem = {
     id: number;
@@ -80,13 +79,16 @@ const cartReducer = (state, action) => {
 }
 
 export const CartProvider = ({ children }) => {
-    const [isCartOpen, setIsCartOpen] = useState(false);
+    //const [isCartOpen, setIsCartOpen] = useState(false);
     //const [cartItems, setCartItems] = useState(new Array<CartItemType>());
     //const [cartCount, setCartCount] = useState(0);
     //const [totalPrice, setTotalPrice] = useState(0);
 
-    const [{ cartItems, cartCount, totalPrice }, dispatch] = useReducer(cartReducer, INITIAL_STATE);
+    const [{ isCartOpen, cartItems, cartCount, totalPrice }, dispatch] = useReducer(cartReducer, INITIAL_STATE);
 
+    const setIsCartOpen = (isCartOpen) => {
+        dispatch({ type: CART_ITEMS_ACTION_TYPES.SET_CART_ITEMS, payload: { isCartOpen } });
+    }
     const setCartItems = (cartItems) => {
         dispatch({ type: CART_ITEMS_ACTION_TYPES.SET_CART_ITEMS, payload: { cartItems } });
     }
