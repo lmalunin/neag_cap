@@ -1,4 +1,5 @@
 import { createContext, Dispatch, useReducer } from "react";
+import { createAction } from "../../utils/reducer.utils";
 
 export type CategoryItem = {
     id: number;
@@ -82,7 +83,12 @@ export const CartProvider = ({ children }) => {
 
     //action creator
     const setIsCartOpen = (isCartOpen) => {
-        dispatch({ type: CART_ITEMS_ACTION_TYPES.SET_CART_ITEMS, payload: { isCartOpen } });
+        dispatch(
+            createAction(
+                CART_ITEMS_ACTION_TYPES.SET_CART_ITEMS,
+                { isCartOpen }
+            )
+        );
     }
 
     //action creator
@@ -92,11 +98,14 @@ export const CartProvider = ({ children }) => {
         )
 
         const totalPrice = newCartItems.reduce((total, cartItem) => total + (cartItem.quantity * cartItem.price), 0);
-
-        dispatch({
-            type: CART_ITEMS_ACTION_TYPES.SET_CART_ITEMS,
-            payload: { cartItems: newCartItems, cartCount, totalPrice }
-        });
+        dispatch(
+            createAction(
+                CART_ITEMS_ACTION_TYPES.SET_CART_ITEMS,
+                {
+                    cartItems: newCartItems,
+                    cartCount,
+                    totalPrice
+                }));
     }
 
     const addItemToCart = (productToAdd) => {
