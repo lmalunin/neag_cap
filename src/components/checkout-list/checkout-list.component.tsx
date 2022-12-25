@@ -1,16 +1,11 @@
 import './checkout-list.styles.scss';
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { CartContext } from "../contexts/cart.context";
 import CheckoutItem from "../checkout-item/checkout.item";
 
 const CheckoutListComponent = () => {
 
-    const { cartItems, totalPrice, setTotalPrice } = useContext(CartContext);
-
-    useEffect(() => {
-        const totalValue = cartItems.reduce((total, cartItem) => total + (cartItem.quantity * cartItem.price), 0);
-        setTotalPrice(totalValue);
-    }, [cartItems]);
+    const { cartItems, totalPrice } = useContext(CartContext);
 
     return (
         <>
