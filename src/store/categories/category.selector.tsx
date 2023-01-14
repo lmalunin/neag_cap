@@ -1,1 +1,1 @@
-export const selectCategories = (state: any) => state?.categories.categoriesMap;
+export const selectCategoriesMap = (state: any) => state?.categories.categoriesMap;
