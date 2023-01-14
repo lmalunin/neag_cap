@@ -7,7 +7,10 @@ import { Navigation } from "./routes/navigation/navigation.component";
 import SignIn from "./routes/authentication/authentication";
 import Shop from "./components/shop/shop.component";
 import CheckoutListComponent from "./components/checkout-list/checkout-list.component";
-import { createUserDocumentFromAuth, onAuthStateChangedListener } from "./utils/firebase/frebase.utils";
+import {
+    createUserDocumentFromAuth,
+    onAuthStateChangedListener
+} from "./utils/firebase/frebase.utils";
 import { setCurrentUser } from "./store/user/user.action";
 
 const App = () => {
@@ -24,6 +27,7 @@ const App = () => {
         })
         return ubsubscribe;
     }, [])
+
 
     return (
         <Routes>
