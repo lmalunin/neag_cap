@@ -1,10 +1,11 @@
 import './sign-up-form.styles.scss';
 
-import { useContext, useState } from "react";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setCurrentUser } from "../../store/user/user.action";
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from "../../utils/firebase/frebase.utils";
 import FormInputComponent from "../form-input/form-input.component";
 import ButtonComponent, { BUTTON_TYPE_CLASSES } from "../button/buttonComponent";
-import { UserContext } from "../contexts/user.context";
 
 const defaultFormFields = {
     displayName: '',
@@ -17,8 +18,8 @@ const SignUpFormComponent = () => {
 
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { displayName, email, password, confirmPassword } = formFields;
+    const dispatch = useDispatch();
 
-    const { setCurrentUser } = useContext(UserContext);
     console.log('Hit!');
 
     const resetFormFields = () => {
@@ -36,7 +37,7 @@ const SignUpFormComponent = () => {
         try {
             const result = await createAuthUserWithEmailAndPassword(email, password);
             await createUserDocumentFromAuth(result?.user, { displayName });
-            setCurrentUser(result?.user);
+            dispatch(setCurrentUser(result?.user));
             resetFormFields();
         } catch (error: any) {
 
