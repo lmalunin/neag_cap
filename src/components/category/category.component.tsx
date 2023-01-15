@@ -10,6 +10,7 @@ const CategoryComponent = () => {
     const { category } = useParams();
     const categoriesMap = useSelector(selectCategoriesMap);
     const [products, setProducts] = useState(categoriesMap[category!]);
+    console.log('render/re-rendering component');
 
     useEffect(() => {
         if (categoriesMap) {
