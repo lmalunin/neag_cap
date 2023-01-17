@@ -41,18 +41,18 @@ const removeAllSelectedItems = (cartItems, productToRemove): CartItemType[] => {
 }
 
 export const CartContext = createContext({
-    isCartOpen: false,
-    setIsCartOpen: (() => undefined) as Dispatch<any>,
-    cartItems: new Array<CartItemType>(),
-    addItemToCart: (() => undefined) as Dispatch<any>,
-    removeItemFromCart: (() => undefined) as Dispatch<any>,
-    removeAllSelectedItemsFromCart: (() => undefined) as Dispatch<any>,
-    cartCount: 0,
-    totalPrice: 0,
+    //isCartOpen: false,
+    //setIsCartOpen: (() => undefined) as Dispatch<any>,
+    // cartItems: new Array<CartItemType>(),
+    // addItemToCart: (() => undefined) as Dispatch<any>,
+    // removeItemFromCart: (() => undefined) as Dispatch<any>,
+    // removeAllSelectedItemsFromCart: (() => undefined) as Dispatch<any>,
+    // cartCount: 0,
+    // totalPrice: 0,
 })
 
 const INITIAL_STATE = {
-    isCartOpen: false,
+    //isCartOpen: false,
     cartItems: new Array<CartItemType>(),
     cartCount: 0,
     totalPrice: 0,
@@ -79,17 +79,17 @@ const cartReducer = (state, action) => {
 
 export const CartProvider = ({ children }) => {
 
-    const [{ isCartOpen, cartItems, cartCount, totalPrice }, dispatch] = useReducer(cartReducer, INITIAL_STATE);
+    const [{ cartItems, cartCount, totalPrice }, dispatch] = useReducer(cartReducer, INITIAL_STATE);
 
     //action creator
-    const setIsCartOpen = (isCartOpen) => {
-        dispatch(
-            createAction(
-                CART_ITEMS_ACTION_TYPES.SET_CART_ITEMS,
-                { isCartOpen }
-            )
-        );
-    }
+    // const setIsCartOpen = (isCartOpen) => {
+    //     dispatch(
+    //         createAction(
+    //             CART_ITEMS_ACTION_TYPES.SET_CART_ITEMS,
+    //             { isCartOpen }
+    //         )
+    //     );
+    // }
 
     //action creator
     const dispatchUpdateCartItems = (newCartItems) => {
@@ -124,14 +124,14 @@ export const CartProvider = ({ children }) => {
     }
 
     const value = {
-        isCartOpen,
-        setIsCartOpen,
+        //isCartOpen,
+        //setIsCartOpen,
         cartItems,
-        addItemToCart,
-        removeItemFromCart,
-        removeAllSelectedItemsFromCart,
-        cartCount,
-        totalPrice,
+        //addItemToCart,
+        //removeItemFromCart,
+        //removeAllSelectedItemsFromCart,
+        //cartCount,
+        //totalPrice,
     };
 
 
