@@ -7,7 +7,6 @@ import { BrowserRouter } from 'react-router-dom'
 import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { CartProvider } from "./components/contexts/cart.context";
 import { store } from "./store/store";
 
 const root = ReactDOM.createRoot(
@@ -17,9 +16,7 @@ root.render(
     <React.StrictMode>
         <Provider store={store}>
             <BrowserRouter>
-                <CartProvider>
-                    <App/>
-                </CartProvider>
+                <App/>
             </BrowserRouter>
         </Provider>
     </React.StrictMode>

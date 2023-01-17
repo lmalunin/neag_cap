@@ -1,4 +1,4 @@
-import { CartItemType } from "../../components/contexts/cart.context";
+import { CartItemType } from "../../interfaces/cart-item-type.inteface";
 import { createAction } from "../../utils/reducer.utils";
 import { CART_ITEMS_ACTION_TYPES } from "./cart.types";
 
