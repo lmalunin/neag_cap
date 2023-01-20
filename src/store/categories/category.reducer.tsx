@@ -1,6 +1,5 @@
 import { Simulate } from "react-dom/test-utils";
 import { CATEGORIES_ACTION_TYPES } from "./category.types";
-import error = Simulate.error;
 
 export const CATEGORIES_INITIAL_STATE = {
     categories: [],
