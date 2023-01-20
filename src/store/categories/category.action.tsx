@@ -5,13 +5,13 @@ import { CATEGORIES_ACTION_TYPES } from "./category.types";
 // export const setCategories = (categories) =>
 //     createAction(CATEGORIES_ACTION_TYPES.SET_CATEGORIES, categories);
 
-export const fetchCategoriesStart = (payload) => createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START, payload);
+export const fetchCategoriesStart = () => createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START);
 export const fetchCategoriesSuccess = (payload) => createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_SUCCESS, payload);
-export const fetchCategoriesError = (payload) => createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_SUCCESS, payload);
+export const fetchCategoriesError = (error) => createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_SUCCESS, error);
 
 export const fetchCategoriesAsync = () => async (dispatch: any) => {
 
-    dispatch(fetchCategoriesStart({}));
+    dispatch(fetchCategoriesStart());
 
     try {
         const categoriesArray = await getCategoriesAndDocuments();
