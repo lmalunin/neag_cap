@@ -1,4 +1,3 @@
-import { Simulate } from "react-dom/test-utils";
 import { CATEGORIES_ACTION_TYPES } from "./category.types";
 
 export const CATEGORIES_INITIAL_STATE = {

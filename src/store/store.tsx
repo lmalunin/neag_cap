@@ -11,6 +11,8 @@ const persistConfig = {
     blacklist: ['user']
 }
 
+export type AppDispatch = typeof store.dispatch
+
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const middleWares = [process.env.NODE_ENV !== 'production' && logger, thunk].filter(Boolean);
