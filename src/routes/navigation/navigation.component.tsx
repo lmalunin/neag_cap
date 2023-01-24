@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import React from "react";
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 import { selectCartIsOpen } from "../../store/cart/cart.selector";

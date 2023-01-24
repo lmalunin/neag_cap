@@ -78,7 +78,7 @@ const SignUpFormComponent = () => {
                         required: true,
                         onChange: (event) => changeHandler(event),
                         name: "email",
-                        value: displayName
+                        value: email
                     }}/>
 
                 <FormInputComponent
@@ -88,7 +88,7 @@ const SignUpFormComponent = () => {
                         required: true,
                         onChange: (event) => changeHandler(event),
                         name: "password",
-                        value: displayName
+                        value: password
                     }}/>
 
                 <FormInputComponent
@@ -98,7 +98,7 @@ const SignUpFormComponent = () => {
                         required: true,
                         onChange: (event) => changeHandler(event),
                         name: "confirmPassword",
-                        value: displayName
+                        value: confirmPassword
                     }}/>
 
                 <ButtonComponent buttonType={BUTTON_TYPE_CLASSES.submit} type='submit'>Sign Up</ButtonComponent>
