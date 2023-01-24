@@ -8,7 +8,7 @@ import SignIn from "./routes/authentication/authentication";
 import Shop from "./components/shop/shop.component";
 import CheckoutListComponent from "./components/checkout-list/checkout-list.component";
 import {
-    createUserDocumentFromAuth,
+    createUserDocumentFromAuth, getCurrentUser,
     onAuthStateChangedListener
 } from "./utils/firebase/frebase.utils";
 import { setCurrentUser } from "./store/user/user.action";
@@ -19,13 +19,7 @@ const App = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const ubsubscribe = onAuthStateChangedListener((user) => {
-            if (user) {
-                createUserDocumentFromAuth(user);
-            }
-            dispatch(setCurrentUser(user));
-        })
-        return ubsubscribe;
+        getCurrentUser().then((user) => console.log('getCurrentUser', user));
     }, [])
 
 
