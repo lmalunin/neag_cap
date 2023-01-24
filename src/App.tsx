@@ -7,11 +7,7 @@ import { Navigation } from "./routes/navigation/navigation.component";
 import SignIn from "./routes/authentication/authentication";
 import Shop from "./components/shop/shop.component";
 import CheckoutListComponent from "./components/checkout-list/checkout-list.component";
-import {
-    createUserDocumentFromAuth, getCurrentUser,
-    onAuthStateChangedListener
-} from "./utils/firebase/frebase.utils";
-import { setCurrentUser } from "./store/user/user.action";
+import { checkUserSession } from "./store/user/user.action";
 
 const App = () => {
     console.log('Hit App');
@@ -19,7 +15,7 @@ const App = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        getCurrentUser().then((user) => console.log('getCurrentUser', user));
+        dispatch(checkUserSession());
     }, [])
 
 
