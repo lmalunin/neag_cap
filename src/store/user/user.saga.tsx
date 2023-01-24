@@ -3,10 +3,18 @@ import {
     getCurrentUser,
     createUserDocumentFromAuth,
     signInWithGooglePopup,
-    signInAuthUserWithEmailAndPassword, createAuthUserWithEmailAndPassword
+    signInAuthUserWithEmailAndPassword, createAuthUserWithEmailAndPassword, signOutUser
 } from "../../utils/firebase/frebase.utils";
 import { USER_ACTION_TYPES } from './user.types';
-import { signInSuccess, signInFailed, signUpSuccess, signUpFailed } from './user.action';
+import {
+    signInSuccess,
+    signInFailed,
+    signUpSuccess,
+    signUpFailed,
+    signOutStart,
+    signOutSuccess,
+    signOutFailed
+} from './user.action';
 
 export function* getSnapshotFromUserAuth(userAuth, additionalDetails?) {
     try {
@@ -89,6 +97,19 @@ export function* onSignUpSuccess() {
     yield takeLatest(USER_ACTION_TYPES.SIGN_UP_SUCCESS, singInAfterSignUp)
 }
 
+export function* signOut() {
+    try {
+        yield call(signOutUser);
+        yield put(signOutSuccess());
+    } catch (error) {
+        yield put(signOutFailed(error));
+    }
+}
+
+export function* onSignOutStart() {
+    yield takeLatest(USER_ACTION_TYPES.SIGN_OUT_START, signOut);
+}
+
 export function* userSagas() {
     yield all([
             call(onCheckUserSession),
@@ -96,6 +117,7 @@ export function* userSagas() {
             call(onEmailSignInStart),
             call(onSignUpStart),
             call(onSignUpSuccess),
+            call(onSignOutStart),
         ]
     );
 }
