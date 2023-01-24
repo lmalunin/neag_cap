@@ -2,7 +2,7 @@ import './sign-up-form.styles.scss';
 
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setCurrentUser } from "../../store/user/user.action";
+import { setCurrentUser, signUpStart } from "../../store/user/user.action";
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from "../../utils/firebase/frebase.utils";
 import FormInputComponent from "../form-input/form-input.component";
 import ButtonComponent, { BUTTON_TYPE_CLASSES } from "../button/buttonComponent";
@@ -35,9 +35,7 @@ const SignUpFormComponent = () => {
         }
 
         try {
-            const result = await createAuthUserWithEmailAndPassword(email, password);
-            await createUserDocumentFromAuth(result?.user, { displayName });
-            dispatch(setCurrentUser(result?.user));
+            dispatch(signUpStart(email, password, displayName));
             resetFormFields();
         } catch (error: any) {
 

@@ -3,10 +3,10 @@ import {
     getCurrentUser,
     createUserDocumentFromAuth,
     signInWithGooglePopup,
-    signInAuthUserWithEmailAndPassword
+    signInAuthUserWithEmailAndPassword, createAuthUserWithEmailAndPassword
 } from "../../utils/firebase/frebase.utils";
 import { USER_ACTION_TYPES } from './user.types';
-import { signInSuccess, signInFailed } from './user.action';
+import { signInSuccess, signInFailed, signUpSuccess, signUpFailed } from './user.action';
 
 export function* getSnapshotFromUserAuth(userAuth, additionalDetails?) {
     try {
@@ -65,11 +65,37 @@ export function* onEmailSignInStart() {
     yield takeLatest(USER_ACTION_TYPES.EMAIL_SIGN_IN_START, signInWithEmail);
 }
 
+export function* signUp(action) {
+    try {
+        const userCredential = yield call(createAuthUserWithEmailAndPassword, action.payload.email, action.payload.password);
+        if (userCredential) {
+            const { user } = userCredential;
+            yield put(signUpSuccess(user, { displayName: action.payload.displayName }));
+        }
+    } catch (error) {
+        yield put(signUpFailed(error as Error));
+    }
+}
+
+export function* onSignUpStart() {
+    yield takeLatest(USER_ACTION_TYPES.SIGN_UP_START, signUp)
+}
+
+export function* singInAfterSignUp(action) {
+    yield call(getSnapshotFromUserAuth, action.payload.user, action.payload.additionalDetails);
+}
+
+export function* onSignUpSuccess() {
+    yield takeLatest(USER_ACTION_TYPES.SIGN_UP_SUCCESS, singInAfterSignUp)
+}
+
 export function* userSagas() {
     yield all([
             call(onCheckUserSession),
             call(onGoogleSignInStart),
-            call(onEmailSignInStart)
+            call(onEmailSignInStart),
+            call(onSignUpStart),
+            call(onSignUpSuccess),
         ]
     );
 }
