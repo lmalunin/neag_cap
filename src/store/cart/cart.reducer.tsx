@@ -1,9 +1,9 @@
-import { CartItemType } from "../../interfaces/cart-item-type.inteface";
+import { CartItem } from "../../interfaces/cart-item-type.inteface";
 import { CART_ITEMS_ACTION_TYPES } from "./cart.types";
 
 export const CART_INITIAL_STATE = {
     isCartOpen: false,
-    cartItems: new Array<CartItemType>(),
+    cartItems: new Array<CartItem>(),
     cartCount: 0,
     totalPrice: 0,
 }
