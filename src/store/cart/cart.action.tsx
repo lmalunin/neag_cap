@@ -18,11 +18,11 @@ export const setIsCartOpen = withMatcher((isCartOpen: boolean): SetIsCartOpen =>
     ));
 
 const updateCartItems = withMatcher((newCartItems: CartItem[]): UpdateCartItems => {
-    const cartCount = newCartItems.reduce(
+    const cartCount = newCartItems?.reduce(
         (total, cartItem) => total + cartItem.quantity, 0
     )
 
-    const totalPrice = newCartItems.reduce((total, cartItem) => total + (cartItem.quantity * cartItem.price), 0);
+    const totalPrice = newCartItems?.reduce((total, cartItem) => total + (cartItem.quantity * cartItem.price), 0);
 
     return createAction(
         CART_ITEMS_ACTION_TYPES.SET_CART_ITEMS,
