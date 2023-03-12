@@ -17,7 +17,7 @@ export const setIsCartOpen = withMatcher((isCartOpen: boolean): SetIsCartOpen =>
         { isCartOpen }
     ));
 
-const updateCartItems = withMatcher((newCartItems: CartItem[]): UpdateCartItems => {
+export const updateCartItems = withMatcher((newCartItems: CartItem[]): UpdateCartItems => {
     const cartCount = newCartItems?.reduce(
         (total, cartItem) => total + cartItem.quantity, 0
     )
