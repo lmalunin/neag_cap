@@ -1,4 +1,3 @@
-import { strict } from "assert";
 import { AnyAction } from "redux";
 
 type Matchable<AC extends () => AnyAction> = AC & {
