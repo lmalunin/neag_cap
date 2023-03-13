@@ -26,7 +26,7 @@ export function* getSnapshotFromUserAuth(userAuth, additionalDetails?) {
             ))
         }
 
-    } catch (error) {
+    } catch (error: unknown | Error) {
         yield put(signInFailed(error));
     }
 }
@@ -101,7 +101,7 @@ export function* signOut() {
     try {
         yield call(signOutUser);
         yield put(signOutSuccess());
-    } catch (error) {
+    } catch (error: Error | unknown) {
         yield put(signOutFailed(error));
     }
 }
