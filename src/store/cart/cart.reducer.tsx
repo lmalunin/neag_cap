@@ -3,10 +3,10 @@ import { CartItem } from "../../interfaces/cart-item-type.inteface";
 import { setIsCartOpen, updateCartItems } from "./cart.action";
 
 export type CartState = {
-    isCartOpen: boolean;
-    cartItems: CartItem[],
-    cartCount: number,
-    totalPrice: number,
+    readonly isCartOpen: boolean;
+    readonly cartItems: CartItem[],
+    readonly cartCount: number,
+    readonly totalPrice: number,
 }
 
 export const CART_INITIAL_STATE = {
