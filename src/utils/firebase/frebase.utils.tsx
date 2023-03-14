@@ -78,6 +78,7 @@ export type AdditionalInformation = {
 }
 
 export type UserData = {
+    id: string;
     createdA: Date;
     displayName: string;
     email: string;
