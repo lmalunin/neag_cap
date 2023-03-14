@@ -1,6 +1,12 @@
+import { FC, InputHTMLAttributes } from 'react'
 import { FormInputLabel, Group, Input, } from "./form-input.styles";
 
-const FormInputComponent = ({ label, inputOptions }) => {
+type FormInputProps = {
+    label: string;
+    inputOptions: any
+} & InputHTMLAttributes<HTMLInputElement>
+
+const FormInputComponent: FC<FormInputProps> = ({ label, inputOptions }) => {
 
     //console.log(inputOptions);
 

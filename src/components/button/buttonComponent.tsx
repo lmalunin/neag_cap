@@ -1,14 +1,15 @@
 import { BaseButton, GoogleSignInButton, InvertedSignInButton } from "./button.styles";
+import { FC, ButtonHTMLAttributes } from 'react';
 
 type BUTTON_TYPES = 'google' | 'inverted' | 'submit';
 
-export const BUTTON_TYPE_CLASSES: Record<BUTTON_TYPES, string> = {
-    submit: 'submit',
-    google: 'google-sign-in',
-    inverted: 'inverted',
-};
+export enum BUTTON_TYPE_CLASSES {
+    submit = 'submit',
+    google = 'google-sign-in',
+    inverted = 'inverted',
+}
 
-const getButton = (buttonType = BUTTON_TYPE_CLASSES.submit) => (
+const getButton = (buttonType = BUTTON_TYPE_CLASSES.submit): typeof BaseButton => (
     {
         [BUTTON_TYPE_CLASSES.submit]: BaseButton,
         [BUTTON_TYPE_CLASSES.google]: GoogleSignInButton,
@@ -17,7 +18,13 @@ const getButton = (buttonType = BUTTON_TYPE_CLASSES.submit) => (
     }[buttonType]
 )
 
-const ButtonComponent = ({ children, buttonType, ...otherProps }) => {
+export type ButtonProps = {
+    children: any,
+    buttonType?: BUTTON_TYPE_CLASSES,
+    isLoading?: boolean
+} & ButtonHTMLAttributes<HTMLButtonElement>
+
+const ButtonComponent: FC<ButtonProps> = ({ children, buttonType, ...otherProps }) => {
 
     const CustomButton = getButton(buttonType);
 

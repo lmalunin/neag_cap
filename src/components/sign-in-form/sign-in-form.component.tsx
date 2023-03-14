@@ -1,6 +1,6 @@
 import './sign-in-form.styles.scss';
 
-import { useState } from "react";
+import { useState, FormEvent, ChangeEvent } from "react";
 import { useDispatch } from "react-redux";
 import { googleSignInStart, emailSignInStart } from "../../store/user/user.action";
 import {
@@ -31,7 +31,7 @@ const SignInFormComponent = () => {
         dispatch(googleSignInStart());
     }
 
-    const submitHandler = async (event) => {
+    const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         try {
@@ -51,7 +51,7 @@ const SignInFormComponent = () => {
         }
     }
 
-    const changeHandler = (event) => {
+    const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setFormFields({ ...formFields, [name]: value });
     }
