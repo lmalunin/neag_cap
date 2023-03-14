@@ -7,7 +7,7 @@ export type CheckUserSession = Action<USER_ACTION_TYPES.CHECK_USER_SESSION>;
 export type SetCurrentUser = ActionWithPayload<USER_ACTION_TYPES.SET_CURRENT_USER, User>;
 export type GoogleSignInStart = Action<USER_ACTION_TYPES.GOOGLE_SIGN_IN_START>;
 export type EmailSignInStart = ActionWithPayload<USER_ACTION_TYPES.EMAIL_SIGN_IN_START, { email: string, password: string }>;
-export type SignInSuccess = ActionWithPayload<USER_ACTION_TYPES.SIGN_IN_SUCCESS, UserData>;
+export type SignInSuccess = ActionWithPayload<USER_ACTION_TYPES.SIGN_IN_SUCCESS, User>;
 export type SignInFailed = ActionWithPayload<USER_ACTION_TYPES.SIGN_IN_FAILED, Error | unknown>;
 export type SignUpStart = ActionWithPayload<USER_ACTION_TYPES.SIGN_UP_START, {
     email: string,
@@ -33,7 +33,7 @@ export const emailSignInStart = withMatcher((email: string, password: string): E
         email,
         password
     }));
-export const signInSuccess = withMatcher((user: UserData): SignInSuccess => createAction(USER_ACTION_TYPES.SIGN_IN_SUCCESS, user));
+export const signInSuccess = withMatcher((user: User): SignInSuccess => createAction(USER_ACTION_TYPES.SIGN_IN_SUCCESS, user));
 export const signInFailed = withMatcher((error: Error | unknown): SignInFailed => createAction(USER_ACTION_TYPES.SIGN_IN_FAILED, error));
 export const signUpStart = withMatcher((email: string, password: string, displayName: string): SignUpStart =>
     createAction(USER_ACTION_TYPES.SIGN_UP_START, {
